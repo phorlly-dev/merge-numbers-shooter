@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #2c496eff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Optional: nicer font */
+@font-face {
+    font-family: Inter;
+    src: local("Inter"), local("Arial");
+}
+
+* {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+        sans-serif;
+}
+
+.btn {
+    &:hover {
+        transform: translateY(-2px);
+    }
+    &:active {
+        transform: translateY(2px);
+    }
+}
