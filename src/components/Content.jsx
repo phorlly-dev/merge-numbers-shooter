@@ -10,7 +10,7 @@ const Content = ({ player, onLogout }) => {
     const maxWidth = "400px";
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 pe-1">
+        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 px-1">
             <section className="text-light mb-2">
                 <span className="mb-0 h6">
                     Welcome{" "}
@@ -26,7 +26,7 @@ const Content = ({ player, onLogout }) => {
                     <i className="fa fa-power-off"></i>
                 </button>
             </section>
-            <section className="d-flex flex-column align-items-center me-1">
+            <section className="d-flex flex-column align-items-center mx-1">
                 {/* 🔹 Header */}
                 <Header maxWidth={maxWidth} />
 
