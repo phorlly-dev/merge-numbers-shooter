@@ -1,4 +1,6 @@
+import * as Phaser from "phaser";
 import { COLS, ROWS } from "../consts";
+import Text from "../objects/Text";
 
 const States = {
     // Weighted RNG for next values
@@ -67,16 +69,15 @@ const States = {
     },
     showMessage(scene, message, color) {
         const { width, height } = scene.sys.game.config;
-        return scene.add
-            .text(width / 2, height / 2, message, {
-                fontSize: "28px",
-                color,
-                fontFamily: "Arial",
-                align: "center",
-                stroke: "#000000",
-                strokeThickness: 3,
-            })
-            .setOrigin(0.5);
+
+        return new Text(scene, width / 2, height / 2, message, {
+            fontSize: "28px",
+            color,
+            fontFamily: "Arial",
+            align: "center",
+            stroke: "#000000",
+            strokeThickness: 3,
+        });
     },
 };
 

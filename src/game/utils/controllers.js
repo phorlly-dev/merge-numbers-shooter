@@ -1,3 +1,4 @@
+import * as Phaser from "phaser";
 import { emitEvent } from "../../hooks/remote";
 import { COLS, ROWS } from "../consts";
 import { checkLevelEnd, checkMerge, spawnNextBox } from "./payloads";
@@ -5,7 +6,7 @@ import { colCenterX, rowCenterY, showMessage } from "./states";
 
 const Controllers = {
     shootBox(scene) {
-        if (scene.isGameOver) return; // 🚫 stop if game over
+        if (scene.isGameOver) return;
 
         const col = scene.currentCol;
 
@@ -20,7 +21,7 @@ const Controllers = {
         if (targetRow < 0) {
             scene.currentBox.destroy();
             scene.currentBox = null;
-            if (!scene.isGameOver) spawnNextBox(scene); // ✅ only if game still running
+            if (!scene.isGameOver) spawnNextBox(scene);
             return;
         }
 
@@ -39,7 +40,7 @@ const Controllers = {
                 checkMerge(scene, col, targetRow);
                 scene.currentBox = null;
                 checkLevelEnd(scene);
-                if (!scene.isGameOver) spawnNextBox(scene); // ✅ only if game still running
+                if (!scene.isGameOver) spawnNextBox(scene);
             },
         });
     },

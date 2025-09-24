@@ -1,4 +1,6 @@
+import * as Phaser from "phaser";
 import { colorForValue } from "../utils/states";
+import Text from "./Text";
 
 class Tile extends Phaser.GameObjects.Container {
     constructor(scene, x, y, value, size) {
@@ -7,14 +9,12 @@ class Tile extends Phaser.GameObjects.Container {
         this.size = size;
 
         this.g = scene.add.graphics();
-        this.label = scene.add
-            .text(0, 0, String(value), {
-                fontSize: Math.max(14, Math.floor(size * 0.42)),
-                color: "#fff",
-                stroke: "#000",
-                strokeThickness: Math.max(2, Math.floor(size * 0.06)),
-            })
-            .setOrigin(0.5);
+        this.label = new Text(scene, 0, 0, String(value), {
+            fontSize: Math.max(14, Math.floor(size * 0.42)),
+            color: "#fff",
+            stroke: "#000",
+            strokeThickness: Math.max(2, Math.floor(size * 0.06)),
+        });
 
         this.add([this.g, this.label]);
         this.redraw();

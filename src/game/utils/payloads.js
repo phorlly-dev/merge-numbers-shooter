@@ -1,5 +1,7 @@
+import * as Phaser from "phaser";
 import { emitEvent } from "../../hooks/remote";
 import { COLS, key, ROWS } from "../consts";
+import Text from "../objects/Text";
 import Tile from "../objects/Tile";
 import { applyGravity, levelCompleted } from "./controllers";
 import {
@@ -153,15 +155,13 @@ const Payloads = {
         }
     },
     showMergeText(scene, word) {
-        const txt = scene.add
-            .text(scene.width / 2, scene.height / 2 - 40, word, {
-                fontSize: "40px",
-                fontStyle: "bold",
-                color: "#00ff00",
-                stroke: "#000",
-                strokeThickness: 6,
-            })
-            .setOrigin(0.5);
+        const txt = new Text(scene, scene.width / 2, scene.height / 2, word, {
+            fontSize: "40px",
+            fontStyle: "bold",
+            color: "#00ff00",
+            stroke: "#000",
+            strokeThickness: 6,
+        });
 
         scene.tweens.add({
             targets: txt,
@@ -187,7 +187,7 @@ const Payloads = {
 
         const emitter = scene.add.particles(
             scene.width / 2,
-            scene.height / 2,
+            scene.height / 2 - scene.tileSize / 2,
             "particle",
             {
                 speed: { min: 100, max: 300 },
