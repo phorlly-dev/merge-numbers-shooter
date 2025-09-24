@@ -25,8 +25,10 @@ const PhaserGame = React.forwardRef(({ player }, ref) => {
 
     React.useEffect(() => {
         const handleSceneReady = (scene) => {
-            if (ref) ref.current.scene = scene;
-            scene.player = player;
+            if (ref) {
+                ref.current.scene = scene;
+                scene.player = player;
+            }
         };
 
         onEvent("current-scene-ready", handleSceneReady);

@@ -1,7 +1,7 @@
 import * as Phaser from "phaser";
-import { COLS, engine, ROWS } from "../consts";
+import { COLS, engine, key, ROWS } from "../consts";
 import { emitEvent, emitEvents, onEvent } from "../../hooks/remote";
-import { spawnNextBox, spawnWave } from "../utils/payload";
+import { spawnNextBox, spawnWave } from "../utils/payloads";
 import { setupPointer } from "../utils/controllers";
 import { colCenterX, getRandomTarget, rowCenterY } from "../utils/states";
 
@@ -58,7 +58,7 @@ class GameEngine extends Phaser.Scene {
         emitEvent("current-scene-ready", this);
         onEvent("sound", (mute) => {
             this.sound.mute = mute;
-            this.sound.play("click");
+            this.sound.play(key.click);
         });
 
         // display layers so the board never covers tiles after a resize
@@ -78,7 +78,7 @@ class GameEngine extends Phaser.Scene {
 
         // drag input
         setupPointer(this);
-        this.sound.play("music", { volume: 0.4, loop: true });
+        this.sound.play(key.music, { volume: 0.36, loop: true });
     }
 
     update() {
@@ -119,10 +119,7 @@ class GameEngine extends Phaser.Scene {
         // clamp so it's never too low or too high
         const total = Phaser.Math.Clamp(base + bonus, 16, 120);
 
-        return {
-            total,
-            current: total,
-        };
+        return { total, current: total };
     }
 
     // ----- Layout -----

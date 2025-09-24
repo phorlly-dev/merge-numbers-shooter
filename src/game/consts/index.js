@@ -8,8 +8,22 @@ const Instances = {
         engine: "game-engine",
     },
     sound: {
-        key: {},
-        value: {},
+        key: {
+            click: "click",
+            merge: "merge",
+            wrong: "wrong",
+            lose: "lose",
+            win: "win",
+            music: "music",
+        },
+        value: {
+            click: "audios/click.mp3",
+            merge: "audios/connect.ogg",
+            wrong: "audios/empty.ogg",
+            lose: "audios/lose.wav",
+            win: "audios/win.ogg",
+            music: "audios/bg_music.ogg",
+        },
     },
     colors: [
         { key: "red", hex: 0xe74c3c },

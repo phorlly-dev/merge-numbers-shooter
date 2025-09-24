@@ -9,7 +9,7 @@ const Content = ({ player, onLogout }) => {
     const phaserRef = React.useRef();
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 m-1">
+        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 p-4">
             <section className="text-light mb-2">
                 <span className="mb-0 h6">
                     Welcome{" "}
@@ -39,6 +39,7 @@ const Content = ({ player, onLogout }) => {
                 >
                     <PhaserGame
                         ref={phaserRef}
+                        player={player}
                         style={{ width: "100%", height: "100%" }}
                     />
                 </main>

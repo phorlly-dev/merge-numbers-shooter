@@ -7,19 +7,17 @@ import { height, width } from "./consts";
 // https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: "#0b0b0b",
+    backgroundColor: "#000",
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: width,
         height: height,
     },
-    physics: { default: "arcade" },
+    physics: { default: "arcade", arcade: { debug: false } },
     scene: [GameBoot, GameEngine],
 };
 
-const StartGame = (parent) => {
-    return new Phaser.Game({ ...config, parent });
-};
+const StartGame = (parent) => new Phaser.Game({ ...config, parent });
 
 export default StartGame;

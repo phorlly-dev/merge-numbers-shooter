@@ -1,6 +1,6 @@
 import { emitEvent } from "../../hooks/remote";
 import { COLS, ROWS } from "../consts";
-import { checkLevelEnd, checkMerge, spawnNextBox } from "./payload";
+import { checkLevelEnd, checkMerge, spawnNextBox } from "./payloads";
 import { colCenterX, rowCenterY, showMessage } from "./states";
 
 const Controllers = {
@@ -68,7 +68,7 @@ const Controllers = {
     levelCompleted(scene, level) {
         const message = showMessage(
             scene,
-            `🎉 You Win!\nLevel ${level} Complete!`,
+            `🎉 You Win!\nLevel ${level} Completed!`,
             "#00ff00"
         );
 
@@ -101,7 +101,7 @@ const Controllers = {
             }
         });
     },
-    moveBox(scene, pointerX) {
+    makeMoveBox(scene, pointerX) {
         let col = Phaser.Math.Clamp(
             Math.floor((pointerX - scene.boardX) / scene.tileSize),
             0,
@@ -132,7 +132,7 @@ const Controllers = {
             if (scene.isDragging && scene.currentBox) {
                 if (Math.abs(p.x - scene.dragStartX) > 10)
                     scene.hasDragged = true;
-                moveBox(scene, p.x);
+                makeMoveBox(scene, p.x);
             }
         });
 
@@ -145,5 +145,10 @@ const Controllers = {
     },
 };
 
-export const { shootBox, applyGravity, levelCompleted, moveBox, setupPointer } =
-    Controllers;
+export const {
+    shootBox,
+    applyGravity,
+    levelCompleted,
+    makeMoveBox,
+    setupPointer,
+} = Controllers;

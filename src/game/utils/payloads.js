@@ -1,5 +1,5 @@
 import { emitEvent } from "../../hooks/remote";
-import { COLS, ROWS } from "../consts";
+import { COLS, key, ROWS } from "../consts";
 import Tile from "../objects/Tile";
 import { applyGravity, levelCompleted } from "./controllers";
 import {
@@ -99,14 +99,15 @@ const Payloads = {
 
             scene.scores.current += mergedValue;
             emitEvent("scores", { ...scene.scores });
-            scene.sound.play("merge");
+            scene.sound.play(key.merge);
+
             const keptTile = scene.grid[keepC][keepR];
             keptTile.setValue(mergedValue);
 
             playMergeBurst(scene);
             applyGravity(scene);
         } else {
-            scene.sound.play("wrong");
+            scene.sound.play(key.wrong);
         }
     },
     checkLevelEnd(scene) {
@@ -114,7 +115,7 @@ const Payloads = {
 
         if (scene.scores.current >= scene.target) {
             scene.isGameOver = true;
-            scene.sound.play("win");
+            scene.sound.play(key.win);
             levelCompleted(scene, scene.level);
 
             // ⏳ Restart safely AFTER cleanup
@@ -135,7 +136,7 @@ const Payloads = {
                 "❌ You lose!\n\nTap to play again",
                 "#ff0000"
             );
-            scene.sound.play("lose");
+            scene.sound.play(key.lose);
             clearBoard(scene);
             scene.input.once("pointerdown", () => {
                 message.destroy();

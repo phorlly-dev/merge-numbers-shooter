@@ -1,5 +1,5 @@
 import * as Phaser from "phaser";
-import { boot, engine } from "../consts";
+import { boot, engine, key, value } from "../consts";
 
 class GameBoot extends Phaser.Scene {
     constructor() {
@@ -8,12 +8,12 @@ class GameBoot extends Phaser.Scene {
 
     preload() {
         this.load.setPath("assets/");
-        this.load.audio("click", "/audios/click.mp3");
-        this.load.audio("merge", "/audios/connect.ogg");
-        this.load.audio("wrong", "/audios/empty.ogg");
-        this.load.audio("lose", "/audios/lose.wav");
-        this.load.audio("win", "/audios/win.ogg");
-        this.load.audio("music", "/audios/bg_music.ogg");
+        this.load.audio(key.click, value.click);
+        this.load.audio(key.merge, value.merge);
+        this.load.audio(key.wrong, value.wrong);
+        this.load.audio(key.lose, value.lose);
+        this.load.audio(key.win, value.win);
+        this.load.audio(key.music, value.music);
     }
 
     create() {
