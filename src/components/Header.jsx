@@ -2,7 +2,7 @@ import * as React from "react";
 import { emitEvent, offEvents, onEvents } from "../hooks/remote";
 import { formatNumber } from "../hooks/format";
 
-const Header = () => {
+const Header = ({ maxWidth }) => {
     const [muted, setMuted] = React.useState(false);
     const [scores, setScores] = React.useState({ current: 0, total: 0 });
     const [moves, setMoves] = React.useState({ current: 0, total: 0 });
@@ -33,7 +33,7 @@ const Header = () => {
         <header
             className="w-100 px-3 py-2 bg-light shadow-sm"
             style={{
-                maxWidth: "480px",
+                maxWidth: maxWidth,
                 borderTopLeftRadius: "12px",
                 borderTopRightRadius: "12px",
             }}

@@ -1,7 +1,7 @@
 const Instances = {
     game: {
-        width: 480,
-        height: 600,
+        width: 400,
+        height: 460,
         COLS: 7,
         ROWS: 8,
         boot: "game-boot",

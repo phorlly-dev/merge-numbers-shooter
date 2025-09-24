@@ -1,13 +1,13 @@
 import * as React from "react";
 
-const Footer = () => {
+const Footer = ({ maxWidth }) => {
     React.useEffect(() => {}, []);
 
     return (
         <footer
             className="w-100 bg-light text-dark text-center p-2 shadow-sm"
             style={{
-                maxWidth: "480px",
+                maxWidth: maxWidth,
                 borderBottomLeftRadius: "12px",
                 borderBottomRightRadius: "12px",
             }}

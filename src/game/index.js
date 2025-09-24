@@ -14,7 +14,17 @@ const config = {
         width: width,
         height: height,
     },
-    physics: { default: "arcade", arcade: { debug: false } },
+    physics: {
+        default: "arcade",
+        arcade: {
+            gravity: { x: 0, y: 0 },
+            debug: false,
+        },
+    },
+    render: {
+        pixelArt: false, // smooth scaling
+        antialias: true, // prevent blurry text edges
+    },
     scene: [GameBoot, GameEngine],
 };
 

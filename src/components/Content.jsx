@@ -7,9 +7,10 @@ const Footer = React.lazy(() => import("./Footer"));
 
 const Content = ({ player, onLogout }) => {
     const phaserRef = React.useRef();
+    const maxWidth = "400px";
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 p-4">
+        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 pe-1">
             <section className="text-light mb-2">
                 <span className="mb-0 h6">
                     Welcome{" "}
@@ -25,16 +26,16 @@ const Content = ({ player, onLogout }) => {
                     <i className="fa fa-power-off"></i>
                 </button>
             </section>
-            <section className="d-flex flex-column align-items-center">
+            <section className="d-flex flex-column align-items-center me-1">
                 {/* 🔹 Header */}
-                <Header />
+                <Header maxWidth={maxWidth} />
 
                 {/* 🔹 Game Board (Phaser) */}
                 <main
                     className="bg-dark d-flex justify-content-center align-items-center"
                     style={{
                         width: "100%",
-                        maxWidth: "480px",
+                        maxWidth: maxWidth,
                     }}
                 >
                     <PhaserGame
@@ -45,7 +46,7 @@ const Content = ({ player, onLogout }) => {
                 </main>
 
                 {/* 🔹 Footer */}
-                <Footer />
+                <Footer maxWidth={maxWidth} />
             </section>
         </div>
     );

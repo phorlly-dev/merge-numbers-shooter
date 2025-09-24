@@ -9,7 +9,7 @@ const App = () => {
     const [player, setPlayer] = React.useState(null);
 
     // Load from Firebase when player logs in
-    const handleAuth = async (name) => {
+    const handleAuth = (name) => {
         setPlayer(name);
         localStorage.setItem("player", name);
         setLoading(false);
@@ -29,6 +29,8 @@ const App = () => {
     const handleLogout = () => {
         localStorage.removeItem("player");
         setPlayer(null);
+        setShowBanner(true);
+        setLoading(true);
     };
 
     if (!player) return <Auth onAuth={handleAuth} />;
