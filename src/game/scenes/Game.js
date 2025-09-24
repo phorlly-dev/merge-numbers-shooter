@@ -92,7 +92,7 @@ class GameEngine extends Phaser.Scene {
         this.target = getRandomTarget(this);
         this.moves = this.calculateMoves(data);
 
-        this.isGameOver = false; // ✅ reset flag
+        this.isGameOver = data.game_over || false;
     }
 
     // ----- UI -----

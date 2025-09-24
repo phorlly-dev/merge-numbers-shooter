@@ -1,6 +1,6 @@
 import * as Phaser from "phaser";
 import { emitEvent } from "../../hooks/remote";
-import { COLS, key, ROWS } from "../consts";
+import { COLS, game, key, ROWS } from "../consts";
 import Text from "../objects/Text";
 import Tile from "../objects/Tile";
 import { applyGravity, levelCompleted } from "./controllers";
@@ -127,6 +127,7 @@ const Payloads = {
 
                 scene.scene.restart({
                     level: scene.level + 1,
+                    game_over: false,
                     total: scene.scores.total + scene.scores.current,
                     remainig_move: scene.moves.current,
                 });
@@ -147,6 +148,7 @@ const Payloads = {
                 scene.time.delayedCall(300, () => {
                     scene.scene.restart({
                         level: scene.level,
+                        game_over: false,
                         total: scene.scores.total,
                         remainig_move: 0,
                     });
