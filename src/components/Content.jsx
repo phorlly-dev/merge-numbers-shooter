@@ -10,7 +10,7 @@ const Content = ({ player, onLogout }) => {
     const maxWidth = "400px";
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 px-1">
+        <div className="d-flex flex-column align-items-center justify-content-center min-vh-100">
             <section className="text-light mb-2">
                 <span className="mb-0 h6">
                     Welcome{" "}
@@ -21,7 +21,7 @@ const Content = ({ player, onLogout }) => {
                     onClick={onLogout}
                     title="Exit from game"
                     aria-label="Exit"
-                    className="btn btn-danger btn-sm rounded-circle shadow ms-2"
+                    className="btn btn-danger btn-sm rounded-circle shadow"
                 >
                     <i className="fa fa-power-off"></i>
                 </button>
