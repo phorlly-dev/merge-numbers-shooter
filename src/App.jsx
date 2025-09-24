@@ -8,39 +8,51 @@ const App = () => {
     const [loading, setLoading] = React.useState(true);
     const [player, setPlayer] = React.useState(null);
 
-    // Load from Firebase when player logs in
-    const handleAuth = (name) => {
-        setPlayer(name);
-        localStorage.setItem("player", name);
-        setLoading(false);
-        setShowBanner(true);
-    };
-
     // Load game data when player logs in
     React.useEffect(() => {
         const savedName = localStorage.getItem("player");
         if (savedName) {
             setPlayer(savedName);
         }
-        setLoading(false);
+        setLoading(true);
         setShowBanner(true);
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem("player");
-        setPlayer(null);
-        setShowBanner(true);
-        setLoading(true);
-    };
-
-    if (!player) return <Auth onAuth={handleAuth} />;
-    else if (showBanner) return <Banner onClose={() => setShowBanner(false)} />;
-    else
+    if (!player) {
+        return (
+            <Auth
+                onAuth={(name) => {
+                    setPlayer(name);
+                    localStorage.setItem("player", name);
+                    setLoading(true);
+                    setShowBanner(true);
+                }}
+            />
+        );
+    } else if (showBanner) {
+        return (
+            <Banner
+                onClose={() => {
+                    setShowBanner(false);
+                    setLoading(false);
+                }}
+            />
+        );
+    } else {
         return (
             <React.Suspense fallback={loading && <div> Loading... </div>}>
-                <Content player={player} onLogout={handleLogout} />
+                <Content
+                    player={player}
+                    onLogout={() => {
+                        localStorage.removeItem("player");
+                        setPlayer(null);
+                        setShowBanner(true);
+                        setLoading(true);
+                    }}
+                />
             </React.Suspense>
         );
+    }
 };
 
 export default App;

@@ -3,11 +3,6 @@ import * as React from "react";
 const Banner = ({ onClose }) => {
     const [visible, setVisible] = React.useState(true);
 
-    const handleClose = () => {
-        setVisible(false);
-        onClose(); // notify parent that game can start
-    };
-
     if (!visible) return null;
 
     return (
@@ -20,7 +15,10 @@ const Banner = ({ onClose }) => {
                 <button
                     className="btn btn-sm btn-danger position-absolute top-0 end-0 m-2 rounded-circle"
                     aria-label="Close"
-                    onClick={handleClose}
+                    onClick={() => {
+                        setVisible(false);
+                        onClose();
+                    }}
                 >
                     <i className="fa fa-close"></i>
                 </button>

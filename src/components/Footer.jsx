@@ -7,7 +7,7 @@ const Footer = ({ maxWidth }) => {
         <footer
             className="w-100 bg-light text-dark text-center p-2 shadow-sm"
             style={{
-                maxWidth: maxWidth,
+                maxWidth,
                 borderBottomLeftRadius: "12px",
                 borderBottomRightRadius: "12px",
             }}

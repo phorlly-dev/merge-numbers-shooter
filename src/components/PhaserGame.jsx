@@ -2,7 +2,7 @@ import * as React from "react";
 import { offEvent, onEvent } from "../hooks/remote";
 import StartGame from "../game";
 
-const PhaserGame = React.forwardRef(({ player }, ref) => {
+const PhaserGame = React.forwardRef(({ player, props }, ref) => {
     const game = React.useRef();
 
     // Create the game inside a useLayoutEffect hook to avoid the game being created outside the DOM
@@ -35,7 +35,7 @@ const PhaserGame = React.forwardRef(({ player }, ref) => {
         return () => offEvent("current-scene-ready", handleSceneReady);
     }, [player, ref]);
 
-    return <div id="game-container"></div>;
+    return <div id="game-container" {...props}></div>;
 });
 
 export default PhaserGame;

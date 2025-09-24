@@ -23,17 +23,11 @@ const Header = ({ maxWidth }) => {
         return () => offEvents({ events, callbacks });
     }, [scores, moves, target, level]);
 
-    const toggle = () => {
-        const newMute = !muted;
-        setMuted(newMute);
-        emitEvent("sound", newMute);
-    };
-
     return (
         <header
             className="w-100 px-3 py-2 bg-light shadow-sm"
             style={{
-                maxWidth: maxWidth,
+                maxWidth,
                 borderTopLeftRadius: "12px",
                 borderTopRightRadius: "12px",
             }}
@@ -55,7 +49,11 @@ const Header = ({ maxWidth }) => {
                 </span>
 
                 <button
-                    onClick={toggle}
+                    onClick={() => {
+                        const newMute = !muted;
+                        setMuted(newMute);
+                        emitEvent("sound", newMute);
+                    }}
                     title="Toggle sound on/off"
                     aria-label="Toggle sound"
                     className={`btn btn-sm rounded-circle shadow ${

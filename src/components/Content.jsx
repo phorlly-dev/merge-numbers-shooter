@@ -21,7 +21,7 @@ const Content = ({ player, onLogout }) => {
                     onClick={onLogout}
                     title="Exit from game"
                     aria-label="Exit"
-                    className="btn btn-danger btn-sm rounded-circle shadow"
+                    className="btn btn-danger btn-sm rounded-circle shadow ms-2"
                 >
                     <i className="fa fa-power-off"></i>
                 </button>

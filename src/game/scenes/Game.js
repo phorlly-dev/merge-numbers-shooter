@@ -133,7 +133,7 @@ class GameEngine extends Phaser.Scene {
         this.boardW = this.tileSize * COLS;
         this.boardH = this.tileSize * ROWS;
         this.boardX = Math.round((this.width - this.boardW) / 2);
-        this.boardY = Math.round(this.tileSize / 2.5);
+        this.boardY = Math.round(this.tileSize / 2.8);
         this.bottomY = this.boardY + this.boardH + Math.round(this.tileSize);
 
         if (this.boardG) this.boardG.destroy();
