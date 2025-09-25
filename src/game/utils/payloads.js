@@ -1,6 +1,6 @@
 import * as Phaser from "phaser";
 import { emitEvent } from "../../hooks/remote";
-import { COLS, game, key, ROWS } from "../consts";
+import { COLS, key, ROWS } from "../consts";
 import Text from "../objects/Text";
 import Tile from "../objects/Tile";
 import { applyGravity, levelCompleted } from "./controllers";
@@ -11,6 +11,7 @@ import {
     rowCenterY,
     showMessage,
 } from "./states";
+import { updateProgress } from "../../hooks/storage";
 
 const Payloads = {
     // ----- Spawn wave rows -----
@@ -121,15 +122,25 @@ const Payloads = {
             levelCompleted(scene, scene.level);
 
             // ⏳ Restart safely AFTER cleanup
-            scene.time.delayedCall(2500, () => {
-                // Clean grid + particles before restart
+            scene.time.delayedCall(2400, async () => {
+                scene.level++;
+                scene.scores.total += scene.scores.current;
                 clearBoard(scene);
 
+                //Save data to DB
+                if (scene.player) {
+                    await updateProgress(scene.player, {
+                        score: scene.scores.total,
+                        move: scene.moves.current,
+                        level: scene.level,
+                    });
+                }
+
                 scene.scene.restart({
-                    level: scene.level + 1,
+                    level: scene.level,
                     game_over: false,
-                    total: scene.scores.total + scene.scores.current,
-                    remainig_move: scene.moves.current,
+                    score: scene.scores.total,
+                    move: scene.moves.current,
                 });
             });
         } else if (scene.moves.current <= 0) {
@@ -149,8 +160,8 @@ const Payloads = {
                     scene.scene.restart({
                         level: scene.level,
                         game_over: false,
-                        total: scene.scores.total,
-                        remainig_move: 0,
+                        score: scene.scores.total,
+                        move: 0,
                     });
                 });
             });

@@ -1,5 +1,6 @@
 import * as React from "react";
 import Auth from "./components/Auth";
+import { createPlayer, loadData } from "./hooks/storage";
 
 const Content = React.lazy(() => import("./components/Content"));
 const Banner = React.lazy(() => import("./components/Banner"));
@@ -21,9 +22,17 @@ const App = () => {
     if (!player) {
         return (
             <Auth
-                onAuth={(name) => {
+                onAuth={async (name) => {
                     setPlayer(name);
                     localStorage.setItem("player", name);
+
+                    // Load from Firebase
+                    const saved = await loadData(name);
+                    if (!saved) {
+                        // new player → create with defaults
+                        const defaults = { level: 1, move: 0, score: 0 };
+                        await createPlayer(name, defaults);
+                    }
                     setLoading(true);
                     setShowBanner(true);
                 }}

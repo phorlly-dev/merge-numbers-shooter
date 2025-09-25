@@ -43,19 +43,19 @@ class GameEngine extends Phaser.Scene {
         this.target = 0;
         this.scores = { current: 0, total: 0 };
         this.moves = { current: 0, total: 0 };
+        this.player = null;
     }
 
     // ----- Lifecycle -----
-    init(data) {
-        this.resetGame(data);
+    init() {
+        emitEvent("current-scene-ready", this);
+        onEvent("firebase-data-loaded", (data) => this.resetGame(data));
 
         // clear old events
         if (this.input) this.input.removeAllListeners();
     }
 
     create() {
-        // 🔹 Lifecycle hook
-        emitEvent("current-scene-ready", this);
         onEvent("sound", (mute) => {
             this.sound.mute = mute;
             this.sound.play(key.click);
@@ -87,8 +87,9 @@ class GameEngine extends Phaser.Scene {
 
     // ----- Reset -----
     resetGame(data = {}) {
+        this.player = data.player;
         this.level = data.level || 1;
-        this.scores = { current: 0, total: data.total || 0 };
+        this.scores = { current: 0, total: data.score || 0 };
         this.target = getRandomTarget(this);
         this.moves = this.calculateMoves(data);
 
@@ -112,9 +113,7 @@ class GameEngine extends Phaser.Scene {
     calculateMoves(data = {}) {
         const base = Math.floor(this.target / 24); // baseline moves from target
         const bonus =
-            this.level > 1
-                ? Math.floor((data.remainig_move || 0) / this.level)
-                : 0;
+            this.level > 1 ? Math.floor((data.move || 0) / this.level) : 0;
 
         // clamp so it's never too low or too high
         const total = Phaser.Math.Clamp(base + bonus, 16, 120);

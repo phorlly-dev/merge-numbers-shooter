@@ -1,6 +1,7 @@
 import * as React from "react";
-import { offEvent, onEvent } from "../hooks/remote";
+import { emitEvent, offEvent, onEvent } from "../hooks/remote";
 import StartGame from "../game";
+import { loadData } from "../hooks/storage";
 
 const PhaserGame = React.forwardRef(({ player, props }, ref) => {
     const game = React.useRef();
@@ -24,10 +25,21 @@ const PhaserGame = React.forwardRef(({ player, props }, ref) => {
     }, [ref]);
 
     React.useEffect(() => {
-        const handleSceneReady = (scene) => {
-            if (ref) {
+        const handleSceneReady = async (scene) => {
+            if (ref && ref.current && player) {
                 ref.current.scene = scene;
-                scene.player = player;
+
+                if (player) {
+                    const value = await loadData(player);
+
+                    // Fire event to Phaser with Firebase data
+                    emitEvent("firebase-data-loaded", {
+                        player,
+                        score: value?.score || 0,
+                        move: value?.move || 0,
+                        level: value?.level || 1,
+                    });
+                }
             }
         };
 
